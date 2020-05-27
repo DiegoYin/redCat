@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>交互</title>
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../js/bootstrap.min.js"></script>
+    <style>
+
+
+        div.categoryWithCarousel div.head {
+            width: 200px;
+            background-color: #C60A0A;
+            height: 36px;
+            line-height: 36px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            margin-left: 20px;
+            display: inline-block;
+        }
+
+        div.categoryWithCarousel div.headbar {
+            background-color: #DD2727;
+        }
+
+        div.categoryWithCarousel div.rightMenu {
+            display: inline-block;
+        }
+
+        div.categoryWithCarousel {
+            width: 100%;
+        }
+
+        div.categoryWithCarousel div.rightMenu a {
+            font-size: 16px;
+            color: white;
+        }
+
+        div.categoryWithCarousel div.rightMenu img {
+            height: 35px;
+        }
+
+        div.categoryWithCarousel div.rightMenu span {
+            margin: 0 20px 0 20px;
+        }
+
+        img.catear {
+            position: absolute;
+            height: 15px;
+            display: none;
+        }
+    </style>
+    <script>
+        $(function () {
+            $("div.rightMenu span").mouseenter(function () {
+                //拿到鼠标移入的那个span的left和top以及它本身的width
+                var left = $(this).position().left;
+                var top = $(this).position().top;
+                var width = $(this).css("width");
+                //鼠标移入的那个span的left在加上他本身宽度的一半就是catear出现的位置的left
+                var destLeft = parseInt(left) + parseInt(width) / 2;
+                $("img#catear").css("left", destLeft);
+                //鼠标移入的那个span的top在减去catear的本身高度(20px)就是它的top
+                $("img#catear").css("top", top - 20);
+                // 在半秒内淡入猫耳朵图片
+                $("img#catear").fadeIn(500);
+            })
+            $("div.rightMenu span").mouseleave(function () {
+                $("img#catear").hide();
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="homepageDiv">
+    <div style="height: 50px"></div>
+    <img class="catear" id="catear" src="../../img/catear.png" style="left: 260.5px; top: 159.65px;display: none;">
+    <div class="categoryWithCarousel">
+        <div class="headbar">
+            <div class="head">
+                <span class="glyphicon glyphicon-th-list" style="margin-left: 10px"></span>
+                <span style="margin-left: 10px">商品分类</span>
+            </div>
+            <div class="rightMenu">
+                <span><a href="#nowhere"><img src="../../img/chaoshi.png"></a> </span>
+                <span><a href="#nowhere"><img src="../../img/guoji.png"></a> </span>
+                <span>
+                <a href="#nowhere">
+                    平板电视
+                </a></span>
+                <span>
+                <a href="#nowhere">
+                    马桶
+                </a></span>
+                <span>
+                <a href="#nowhere">
+                    沙发
+                </a></span>
+                <span>
+                <a href="#nowhere">
+                    电热水器
+                </a></span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

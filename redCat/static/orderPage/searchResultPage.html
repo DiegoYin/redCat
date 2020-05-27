@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>查询结果页面</title>
+    <script src="../../js/jquery-3.4.1.min.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../js/bootstrap.min.js"></script>
+    <link href="../../css/searchResultPageCss.css" rel="stylesheet">
+    <link href="../../css/publicPageCss.css" rel="stylesheet">
+</head>
+<script>
+    function formatMoney(num){
+        num = num.toString().replace(/\$|\,/g,'');
+        if(isNaN(num))
+            num = "0";
+        sign = (num == (num = Math.abs(num)));
+        num = Math.floor(num*100+0.50000000001);
+        cents = num%100;
+        num = Math.floor(num/100).toString();
+        if(cents<10)
+            cents = "0" + cents;
+        for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+            num = num.substring(0,num.length-(4*i+3))+','+
+                num.substring(num.length-(4*i+3));
+        return (((sign)?'':'-') + num + '.' + cents);
+    }
+    function checkEmpty(id, name){
+        var value = $("#"+id).val();
+        if(value.length==0){
+
+            $("#"+id)[0].focus();
+            return false;
+        }
+        return true;
+    }
+
+    $(function(){
+
+        $("a.productDetailTopReviewLink").on("click",function(){
+            $("div.productReviewDiv").show();
+            $("div.productDetailDiv").hide();
+        });
+        $("a.productReviewTopPartSelectedLink").on("click",function(){
+            $("div.productReviewDiv").hide();
+            $("div.productDetailDiv").show();
+        });
+
+        $("span.leaveMessageTextareaSpan").hide();
+        $("img.leaveMessageImg").on("click",function(){
+
+            $(this).hide();
+            $("span.leaveMessageTextareaSpan").show();
+            $("div.orderItemSumDiv").css("height","100");
+        });
+
+        $("div#footer a[href$=#nowhere]").on("click",function(){
+            alert("模仿天猫的连接，并没有跳转到实际的页面");
+        });
+
+        $("a.wangwanglink").on("click",function(){
+            alert("模仿旺旺的图标，并不会打开旺旺");
+        });
+        $("a.notImplementLink").on("click",function(){
+            alert("这个功能没做，蛤蛤~");
+        });
+
+    });
+
+</script>
+<body>
+<!--头部-->
+<nav class="top">
+    <a href="#nowhere">
+        <span class="glyphicon glyphicon-home redColor"></span>
+        天猫首页
+    </a>
+    <span>喵,欢迎来天猫</span>
+    <a href="#nowhere">请登录</a>
+    <a href="#nowhere">免费注册</a>
+    <span class="pull-right">
+    <a href="#nowhere">我的订单</a>
+    <a href="#nowhere">
+        <span class=" glyphicon glyphicon-shopping-cart redColor"></span>
+        购物车<strong>0</strong>件</a>
+    </span>
+</nav>
+<!--搜索框-->
+<div class="gifSearchDiv">
+    <a href="#nowhere"><img class="logo" src="../../img/logo.gif" id="logo"></a>
+    <div class="searchDiv">
+        <input type="text" placeholder="新品运动鞋   时尚西装" name="search">
+        <button>搜索</button>
+        <div class="searchBelow">
+            <a href="nowhere">平衡车</a>
+            <span>|</span>
+            <a href="nowhere">AI扫地机</a>
+            <span>|</span>
+            <a href="nowhere">榨汁机</a>
+            <span>|</span>
+            <a href="nowhere">冰箱</a>
+        </div>
+    </div>
+</div>
+<div style="height: 50px"></div>
+<!--主题内容-->
+<div id="searchResult">
+
+    <div class="searchResultDiv">
+
+        <div class="searchProducts">
+
+            <div class="productUnit" price="10560.0">
+                <a href="#nowhere">
+                    <img class="productImage" src="../../img/productSingle/1456.jpg">
+                </a>
+                <span class="productPrice">¥10,560.00</span>
+                <a class="productLink" href="#nowhere">
+                    雅居汇欧式真皮沙发实木高档简约大户型客厅皮艺沙发组合美式沙发
+                </a>
+
+                <a class="tmallLink" href="#nowhere">天猫专卖</a>
+
+                <div class="show1 productInfo">
+                    <span class="monthDeal ">月成交 <span class="productDealNumber">24笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">19</span></span>
+                    <span class="wangwang"><img src="../../img/site/wangwang.png"></span>
+                </div>
+
+            </div>
+
+            <div class="productUnit" price="6566.4">
+                <a href="#nowhere">
+                    <img class="productImage" src="../../img/productSingle/1785.jpg">
+                </a>
+                <span class="productPrice">¥6,566.40</span>
+                <a class="productLink" href="#nowhere">
+                    美得林欧式沙发123组合高档奢华三人大户型客厅实木简欧布艺沙发
+                </a>
+
+                <a class="tmallLink" href="#nowhere">天猫专卖</a>
+
+                <div class="show1 productInfo">
+                    <span class="monthDeal ">月成交 <span class="productDealNumber">12笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">19</span></span>
+                    <span class="wangwang"><img src="../../img/site/wangwang.png"></span>
+                </div>
+
+            </div>
+
+            <div class="productUnit" price="4200.0">
+                <a href="#nowhere">
+                    <img class="productImage" src="../../img/productSingle/1807.jpg">
+                </a>
+                <span class="productPrice">¥4,200.00</span>
+                <a class="productLink" href="#nowhere">
+                    纳威大户型客厅皮艺黑色现代简约u型转角真皮沙发家具定制NAV261
+                </a>
+
+                <a class="tmallLink" href="#nowhere">天猫专卖</a>
+
+                <div class="show1 productInfo">
+                    <span class="monthDeal ">月成交 <span class="productDealNumber">22笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">18</span></span>
+                    <span class="wangwang"><img src="../../img/site/wangwang.png"></span>
+                </div>
+
+            </div>
+
+            <div class="productUnit" price="17998.5">
+                <a href="#nowhere">
+                    <img class="productImage" src="../../img/productSingle/1829.jpg">
+                </a>
+                <span class="productPrice">¥17,998.50</span>
+                <a class="productLink" href="#nowhere">
+                    左右简约现代头层牛皮真皮沙发组合时尚转角大户型皮沙发DZY2826
+                </a>
+
+                <a class="tmallLink" href="#nowhere">天猫专卖</a>
+
+                <div class="show1 productInfo">
+                    <span class="monthDeal ">月成交 <span class="productDealNumber">36笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">17</span></span>
+                    <span class="wangwang"><img src="../../img/site/wangwang.png"></span>
+                </div>
+
+            </div>
+
+            <div class="productUnit" price="5070.0">
+                <a href="#nowhere">
+                    <img class="productImage" src="../../img/productSingle/1873.jpg">
+                </a>
+                <span class="productPrice">¥5,070.00</span>
+                <a class="productLink" href="#nowhere">
+                    佐慕 布艺沙发简约现代可拆洗大户型客厅U型转角北欧皮布沙发组合
+                </a>
+
+                <a class="tmallLink" href="#nowhere">天猫专卖</a>
+
+                <div class="show1 productInfo">
+                    <span class="monthDeal ">月成交 <span class="productDealNumber">37笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">17</span></span>
+                    <span class="wangwang"><img src="../../img/site/wangwang.png"></span>
+                </div>
+
+            </div>
+
+            <div class="productUnit" price="4274.4">
+                <a href="#nowhere">
+                    <img class="productImage" src="../../img/productSingle/1906.jpg">
+                </a>
+                <span class="productPrice">¥4,274.40</span>
+                <a class="productLink" href="#nowhere">
+                    南台布艺沙发组合可拆洗简约现代客厅整装家具布艺沙发组合大户型
+                </a>
+
+                <a class="tmallLink" href="#nowhere">天猫专卖</a>
+
+                <div class="show1 productInfo">
+                    <span class="monthDeal ">月成交 <span class="productDealNumber">22笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">19</span></span>
+                    <span class="wangwang"><img src="../../img/site/wangwang.png"></span>
+                </div>
+
+            </div>
+
+            <div class="productUnit" price="7008.4">
+                <a href="#nowhere">
+                    <img class="productImage" src="../../img/productSingle/1917.jpg">
+                </a>
+                <span class="productPrice">¥7,008.40</span>
+                <a class="productLink" href="#nowhere">
+                    依然美佳欧式布艺沙发组合可拆洗新款实木雕花大户型奢华别墅家具
+                </a>
+
+                <a class="tmallLink" href="#nowhere">天猫专卖</a>
+
+                <div class="show1 productInfo">
+                    <span class="monthDeal ">月成交 <span class="productDealNumber">15笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">15</span></span>
+                    <span class="wangwang"><img src="../../img/site/wangwang.png"></span>
+                </div>
+
+            </div>
+
+            <div class="productUnit" price="22715.0">
+                <a href="#nowhere">
+                    <img class="productImage" src="../../img/productSingle/1928.jpg">
+                </a>
+                <span class="productPrice">¥22,715.00</span>
+                <a class="productLink" href="#nowhere">
+                    雅居汇欧式沙发组合实木雕花客厅高档奢华大户型住宅家具布艺沙发
+                </a>
+
+                <a class="tmallLink" href="#nowhere">天猫专卖</a>
+
+                <div class="show1 productInfo">
+                    <span class="monthDeal ">月成交 <span class="productDealNumber">22笔</span></span>
+                    <span class="productReview">评价<span class="productReviewNumber">15</span></span>
+                    <span class="wangwang"><img src="../../img/site/wangwang.png"></span>
+                </div>
+
+            </div>
+
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+</div>
+<!--foot1,foot2-->
+<div style="display: block;" class="footer" id="footer">
+    <div class="footer_ensure" id="footer_ensure">
+        <a><img src="../../img/ensure.png"></a>
+    </div>
+    <div class="footer_desc" id="footer_desc">
+        <div class="descColumn">
+            <span class="descColumnTitle">购物指南</span>
+            <a href="#nowhere">免费注册</a>
+            <a href="#nowhere">开通支付宝</a>
+            <a href="#nowhere">支付宝充值</a>
+        </div>
+        <div class="descColumn">
+            <span class="descColumnTitle">天猫保障</span>
+            <a href="#nowhere">发票保障</a>
+            <a href="#nowhere">售后规则</a>
+            <a href="#nowhere">缺货赔付</a>
+        </div>
+        <div class="descColumn">
+            <span class="descColumnTitle">支付方式</span>
+            <a href="#nowhere">快捷支付</a>
+            <a href="#nowhere">信用卡</a>
+            <a href="#nowhere">蚂蚁花呗</a>
+            <a href="#nowhere">货到付款</a>
+        </div>
+        <div class="descColumn">
+            <span class="descColumnTitle">商家服务</span>
+            <a href="#nowhere">商家入驻</a>
+            <a href="#nowhere">商家中心</a>
+            <a href="#nowhere">天猫智库</a>
+            <a href="#nowhere">天猫规则</a>
+            <a href="#nowhere">物流服务</a>
+            <a href="#nowhere">喵言喵语</a>
+            <a href="#nowhere">运营服务</a>
+        </div>
+        <div class="descColumn">
+            <span class="descColumnTitle">手机天猫</span>
+            <a href="#nowhere"><img src="../../img/canvas.png"></a>
+        </div>
+
+    </div>
+    <div style="clear: both"></div>
+</div>
+<div class="footer2" id="footer2">
+    <img src="../../img/cateye.png" class="catEye" id="catEye">
+    <div class="copyRight" id="copyRight">
+        <div class="white_link">
+            <a href="#nowhere">关于天猫</a>
+            <a href="#nowhere"> 帮助中心</a>
+            <a href="#nowhere">开放平台</a>
+            <a href="#nowhere"> 诚聘英才</a>
+            <a href="#nowhere">联系我们</a>
+            <a href="#nowhere">网站合作</a>
+            <a href="#nowhere">法律声明</a>
+            <a href="#nowhere">知识产权</a>
+            <a href="#nowhere"> 廉正举报 </a>
+        </div>
+        <div class="white_link">
+            <a href="nowhere"> 阿里巴巴集团</a><span class="slash">|</span>
+            <a href="nowhere"> 淘宝网</a><span class="slash">|</span>
+            <a href="nowhere">天猫 </a><span class="slash">|</span>
+            <a href="nowhere"> 聚划算</a><span class="slash">|</span>
+            <a href="nowhere">全球速卖通</a><span class="slash">|</span>
+            <a href="nowhere">阿里巴巴国际交易市场</a><span class="slash">|</span>
+            <a href="nowhere">1688</a><span class="slash">|</span>
+            <a href="nowhere">阿里妈妈</a><span class="slash">|</span>
+            <a href="#nowhere"> 阿里旅行·去啊 </a><span class="slash">|</span>
+            <a href="#nowhere"> 阿里云计算 </a><span class="slash">|</span>
+            <a href="#nowhere"> 阿里通信 </a><span class="slash">|</span>
+            <a href="#nowhere"> YunOS </a><span class="slash">|</span>
+            <a href="#nowhere"> 阿里旅行·去啊 </a><span class="slash">|</span>
+            <a href="#nowhere"> 万网 </a><span class="slash">|</span>
+            <a href="#nowhere"> 高德 </a><span class="slash">|</span>
+            <a href="#nowhere"> 优视 </a><span class="slash">|</span>
+            <a href="#nowhere"> 友盟 </a><span class="slash">|</span>
+            <a href="#nowhere"> 虾米 </a><span class="slash">|</span>
+            <a href="#nowhere"> 天天动听 </a><span class="slash">|</span>
+            <a href="#nowhere"> 来往 </a><span class="slash">|</span>
+            <a href="#nowhere"> 钉钉 </a><span class="slash">|</span>
+            <a href="#nowhere"> 支付宝 </a>
+        </div>
+        <div class="license">
+            <span>增值电信业务经营许可证： 浙B2-20110446</span>
+            <span>网络文化经营许可证：浙网文[2015]0295-065号</span>
+            <span>互联网医疗保健信息服务 审核同意书 浙卫网审【2014】6号 </span>
+            <span>互联网药品信息服务资质证书编号：浙-（经营性）-2012-0005</span>
+            <div class="copyRightYear">&copy; 2003-2016 TMALL.COM 版权所有</div>
+            <div>
+                <a href="#nowhere"><img src="../../img/copyRight1.jpg"></a>
+                <a href="#nowhere"><img src="../../img/copyRight2.jpg"></a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
